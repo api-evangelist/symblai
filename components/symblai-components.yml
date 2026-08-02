@@ -1,0 +1,17 @@
+generated: '2026-07-21'
+method: searched
+source: github.com/symblai/symbl-ui-components
+notes: >-
+  Client-side / embeddable UI components published by Symbl.ai for rendering
+  conversation-intelligence surfaces (transcripts, insights, summaries) in web
+  apps. Distinct from the server/client SDKs catalogued in packages/.
+families:
+  - family: conversation-intelligence-ui
+    repo: https://github.com/symblai/symbl-ui-components
+    description: >-
+      Symbl.ai UI component library for embedding conversation-intelligence
+      renderings (real-time transcription, topics, action items, questions,
+      sentiment) into web applications.
+    components:
+      - name: symbl-ui-components
+        repo: https://github.com/symblai/symbl-ui-components

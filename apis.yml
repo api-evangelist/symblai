@@ -1,7 +1,28 @@
 aid: symblai
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/symblai.png
 name: Symbl.ai
-description: Symbl.ai is a company surfaced as a portfolio company of techstars and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Symbl.ai is a conversation-intelligence platform for understanding and
+  generating insights from human conversations across voice, video, and text.
+  Its developer platform exposed Async, Streaming, and Telephony APIs plus the
+  Nebula LLM for real-time speech-to-text and conversational insights — action
+  items, topics, questions, follow-ups, sentiment, and custom trackers — with
+  first-party SDKs for JavaScript, Web (browser), Python, and Go. Symbl.ai was
+  acquired by Invoca; the standalone developer platform (api./docs./platform.
+  symbl.ai) has since been decommissioned, but the official client SDKs remain
+  published on npm, PyPI, pkg.go.dev, and the github.com/symblai organization,
+  and the marketing, blog, pricing, and support surfaces stay live.
 url: https://raw.githubusercontent.com/api-evangelist/symblai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,11 +30,23 @@ x-backed-by:
 - techstars
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 4
+  pass: local-v1
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
+- Conversation Intelligence
+- Speech to Text
+- Voice AI
+- Artificial Intelligence
+- Machine Learning
+- Real Time
+- SDKs
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -22,4 +55,28 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://rammer.ai/
+  url: https://symbl.ai/
+- type: DeveloperPortal
+  url: https://symbl.ai/developers/
+- type: Blog
+  url: https://symbl.ai/developers/blog/
+- type: GitHubOrganization
+  url: https://github.com/symblai
+- type: Pricing
+  url: https://symbl.ai/company/pricing/
+- type: Support
+  url: https://symbl.ai/service-and-support/support/support-plans/
+- type: TermsOfService
+  url: https://symbl.ai/termsofservice/
+- type: PrivacyPolicy
+  url: https://symbl.ai/privacy-policy/
+- type: Packages
+  url: packages/symblai-packages.yml
+- type: SDKs
+  url: packages/symblai-packages.yml
+- type: Components
+  url: components/symblai-components.yml
+- type: DomainSecurity
+  url: security/symblai-domain-security.yml
+- type: LLMsTxt
+  url: llms/symblai-llms.txt
