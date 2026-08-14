@@ -19,10 +19,14 @@ description: >-
   Nebula LLM for real-time speech-to-text and conversational insights — action
   items, topics, questions, follow-ups, sentiment, and custom trackers — with
   first-party SDKs for JavaScript, Web (browser), Python, and Go. Symbl.ai was
-  acquired by Invoca; the standalone developer platform (api./docs./platform.
-  symbl.ai) has since been decommissioned, but the official client SDKs remain
-  published on npm, PyPI, pkg.go.dev, and the github.com/symblai organization,
-  and the marketing, blog, pricing, and support surfaces stay live.
+  acquired by Invoca (announced 2025-05-28) and the standalone developer platform
+  is decommissioned: api.symbl.ai, docs.symbl.ai, platform.symbl.ai,
+  nebula.symbl.ai and integrations.symbl.ai all fail to resolve in DNS as of
+  2026-08-14, so no endpoint is callable and no account can be created. What
+  survives is real and public — the open-sourced documentation repository
+  (github.com/symblai/symbl-docs), first-party Postman workspaces, the client
+  SDKs on npm, PyPI and pkg.go.dev (newest release 2024-11-18), and the live
+  marketing, blog, pricing and SOC 2 / HIPAA / PCI / GDPR compliance pages.
 url: https://raw.githubusercontent.com/api-evangelist/symblai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -31,13 +35,34 @@ x-backed-by:
 x-tier: stub
 x-tier-reason: portfolio-lead
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-14'
   status: enriched
-  artifacts_added: 4
+  artifacts_added: 7
   pass: local-v1
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    Symbl.ai's developer program no longer exists — api.symbl.ai, docs.symbl.ai,
+    platform.symbl.ai, nebula.symbl.ai and integrations.symbl.ai were all removed
+    from DNS after the Invoca acquisition, so there is no endpoint to call and the
+    Sign-up button on the still-live pricing page points at a host that does not
+    resolve.
+  evidence:
+  - url: https://api.symbl.ai/
+    status: 0
+  - url: https://docs.symbl.ai/
+    status: 0
+  - url: https://platform.symbl.ai/#/signup
+    status: 0
+  - url: https://symbl.ai/openapi.json
+    status: 404
+  - url: https://symbl.ai/company/pricing/
+    status: 200
+  checked: '2026-08-14'
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-14'
 tags:
 - Company
 - Conversation Intelligence
@@ -80,3 +105,21 @@ common:
   url: security/symblai-domain-security.yml
 - type: LLMsTxt
   url: llms/symblai-llms.txt
+- type: Documentation
+  url: https://github.com/symblai/symbl-docs
+- type: Postman
+  url: https://www.postman.com/symbldotai/workspace/symbl-ai/overview
+- type: Lifecycle
+  url: lifecycle/symblai-lifecycle.yml
+- type: ChangeLog
+  url: changelog/symblai-changelog.yml
+- type: Plans
+  url: plans/symblai-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/symblai-rate-limits.yml
+- type: Conformance
+  url: conformance/symblai-conformance.yml
+- type: Compliance
+  url: conformance/symblai-conformance.yml
+- type: TrustCenter
+  url: security/symblai-trust-center.yml
