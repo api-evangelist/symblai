@@ -1,0 +1,88 @@
+generated: '2026-08-14'
+method: searched
+source: https://github.com/symblai/symbl-docs/blob/master/docs/changelog.md
+docs: https://github.com/symblai/symbl-docs/blob/master/docs/changelog.md
+notes: >-
+  Symbl.ai published a dated "What's New" changelog inside its open-sourced documentation.
+  The hosted rendering (docs.symbl.ai/docs/changelog) no longer resolves; the source markdown
+  is still public in the symblai/symbl-docs repository, which is the URL recorded here. THE
+  CHANGELOG IS FROZEN: the newest entry is 22 June 2022 and the repository's last push was
+  2022-07-19, so nothing has been recorded for the four years since, including the 2025 Invoca
+  acquisition and the removal of the platform. Recorded as a real published changelog with its
+  staleness stated as data, not as an active release feed.
+status: frozen
+scheme: dated
+date_format: 'D Month YYYY'
+current_version: null
+current_version_note: >-
+  Symbl.ai versioned its API by URL path (/v1/) and never published a dated or semantic API
+  version alongside changelog entries; entries version the SDKs, not the API.
+entry_count: 27
+first_entry: '2021-04-22'
+last_entry: '2022-06-22'
+days_since_last_entry_at_check: 1514
+release_phases:
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/product-releases.md
+  phases:
+  - name: Alpha
+    means: Baseline functionality, subject to change. No SLA. No technical support.
+  - name: Beta
+    means: Mature functionality, subject to change. Technical support available.
+  - name: General Availability
+    means: Intended functions complete. SLA in effect. Technical support available.
+entries:
+- date: '2022-06-22'
+  kind: sdk
+  breaking: false
+  highlights:
+  - Web SDK (Beta) 1.0.5 released.
+  - Key validation added to StreamingAPIConnectionConfig when passed to startProcessing.
+  - Vulnerable npm dependencies removed or updated.
+- date: '2022-05-26'
+  kind: sdk
+  breaking: true
+  highlights:
+  - Web SDK (Beta) 1.0.4 released.
+  - Reconnection support added via reconnectOnError in SymblConfig.
+  - getConversationId() added to StreamingAPIConnection and SubscribeAPIConnection.
+  - >-
+    BREAKING — attachAudioSourceElement no longer accepts <video> elements; separate
+    attachVideoSourceElement / detachVideoSourceElement / updateVideoSourceElement methods
+    must be used instead.
+- date: '2022-05-24'
+  kind: api
+  breaking: false
+  highlights:
+  - Summary API entered Beta.
+- date: '2022-04-12'
+  kind: sdk
+  breaking: false
+  highlights:
+  - New Web SDK (Beta) for adding conversation intelligence directly in the browser.
+- date: '2022-03-14'
+  kind: api
+  breaking: false
+  highlights:
+  - Streaming API can enable all Trackers associated with an account.
+- date: '2022-02-08'
+  kind: api
+  breaking: false
+  highlights:
+  - Tracker creation limit raised to 500 per account.
+  - Summarization Alpha release of the Summary API.
+  - Messages API gained timeOffset and duration parameters (Labs).
+  - >-
+    Topics API parameter customVocabulary renamed to customTopicVocabulary, with backward
+    compatibility retained.
+- date: '2022-01-31'
+  kind: platform
+  breaking: false
+  highlights:
+  - Trackers Management UI added to the Symbl Platform console.
+x-evidence:
+  fetched: '2026-08-14'
+  url: https://raw.githubusercontent.com/symblai/symbl-docs/master/docs/changelog.md
+  http_status: 200
+  content_type: text/plain
+  hosted_url_probed: https://docs.symbl.ai/docs/changelog
+  hosted_url_result: NXDOMAIN

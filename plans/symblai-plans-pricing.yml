@@ -1,0 +1,106 @@
+generated: '2026-08-14'
+method: searched
+source: https://symbl.ai/company/pricing/
+docs: https://symbl.ai/company/pricing/
+currency: USD
+billing_period: monthly
+model: usage-based
+notes: >-
+  Read verbatim from Symbl.ai's live public pricing page on 2026-08-14 (HTTP 200). The page is
+  fully public — no login, no sales gate — and prices audio/video by the minute and text by the
+  word, with per-tier concurrency ceilings. IMPORTANT CONTEXT: the page still sells the product
+  and its Sign-up buttons still point at https://platform.symbl.ai/#/signup, which no longer
+  resolves in DNS, so none of these plans can actually be purchased or self-served today. See
+  lifecycle/symblai-lifecycle.yml. Prices are recorded exactly as published; nothing is
+  inferred.
+plan_count: 3
+plans:
+- name: Free
+  price: 0
+  currency: USD
+  billing_period: monthly
+  commitment: none
+  credit_card_required: false
+  included:
+  - metric: audio_video_minutes
+    quantity: 1000
+    period: month
+    unit_price: 0
+  - metric: text_words
+    quantity: 10000
+    period: month
+    unit_price: 0
+  - metric: call_score_criteria
+    quantity: 50
+    unit_price: 0
+  - metric: real_time_assist_minutes
+    quantity: 5
+    unit_price: 0
+  limits:
+    concurrent_connections: 5
+  overage: null
+  signup: https://platform.symbl.ai/#/signup
+  signup_reachable: false
+- name: PayG
+  price: null
+  price_note: Pay-as-you-go; no usage commitment required.
+  currency: USD
+  billing_period: monthly
+  commitment: none
+  included:
+  - metric: audio_video_minutes
+    quantity: 1000
+    period: month
+    unit_price: 0
+  - metric: text_words
+    quantity: 10000
+    period: month
+    unit_price: 0
+  - metric: real_time_assist_minutes
+    quantity: 5
+    unit_price: 0
+  overage:
+  - metric: audio_video_minutes
+    tiers:
+    - range: 1001-30000
+      unit_price: 0.027
+      unit: minute
+    - range: 30001+
+      unit_price: 0.017
+      unit: minute
+  - metric: text_words
+    tiers:
+    - range: 10001-3750000
+      unit_price: 0.0002
+      unit: word
+    - range: 3750001+
+      unit_price: 0.00012
+      unit: word
+  - metric: call_score_criteria
+    unit_price: 0.10
+    unit: criteria per conversation
+  limits:
+    concurrent_connections: 50
+  signup: https://platform.symbl.ai/#/signup
+  signup_reachable: false
+- name: Enterprise
+  price: null
+  price_note: Custom — contact sales. High-volume usage discounts.
+  currency: USD
+  commitment: custom
+  included:
+  - Nebula Model API access at scale
+  - Enterprise support and SLAs
+  - Deployment in a private environment
+  limits:
+    concurrent_connections: custom
+  contact: https://symbl.ai/company/request-a-demo/
+footnotes:
+- >-
+  Real Time Assist API is capped at 5 free minutes on both Free and PayG; additional usage
+  requires contacting sales.
+x-evidence:
+  fetched: '2026-08-14'
+  url: https://symbl.ai/company/pricing/
+  http_status: 200
+  content_type: text/html; charset=UTF-8

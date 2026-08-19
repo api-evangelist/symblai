@@ -1,0 +1,92 @@
+generated: '2026-08-14'
+method: probed
+source: live HTTP probes of every host named in apis.yml plus the historical API/docs hosts
+notes: >-
+  Every /.well-known/ path probed on symbl.ai returns 404. The 404 body is the WordPress
+  theme's HTML error page (~110KB), not a document — it is recorded as a miss. The historical
+  API, docs, console and Nebula hosts (api./docs./platform./nebula./integrations.symbl.ai)
+  no longer resolve in DNS at all, so no /.well-known/ path can be served from them. NO
+  WellKnown or SecurityTxt pointer is emitted from this probe: nothing returned a real
+  document.
+hosts:
+- host: symbl.ai
+  resolves: true
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+    content_type: text/html
+    document: false
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    content_type: text/html; charset=UTF-8
+    document: false
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    content_type: text/html; charset=UTF-8
+    document: false
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    content_type: text/html; charset=UTF-8
+    document: false
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    content_type: text/html; charset=UTF-8
+    document: false
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    content_type: text/html; charset=UTF-8
+    document: false
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    content_type: text/html; charset=UTF-8
+    document: false
+    file: null
+  - path: /llms.txt
+    status: 404
+    content_type: text/html
+    document: false
+    file: null
+  - path: /openapi.json
+    status: 404
+    content_type: text/html; charset=UTF-8
+    document: false
+    file: null
+  - path: /robots.txt
+    status: 200
+    content_type: text/plain
+    document: true
+    file: null
+    note: >-
+      Served, but robots.txt is not a well-known API surface document; recorded for
+      completeness only and not pointed at from apis.yml.
+- host: api.symbl.ai
+  resolves: false
+  dns: NXDOMAIN
+  probes: []
+- host: docs.symbl.ai
+  resolves: false
+  dns: NXDOMAIN
+  probes: []
+- host: platform.symbl.ai
+  resolves: false
+  dns: NXDOMAIN
+  probes: []
+- host: nebula.symbl.ai
+  resolves: false
+  dns: NXDOMAIN
+  probes: []
+- host: integrations.symbl.ai
+  resolves: false
+  dns: NXDOMAIN
+  probes: []
+summary:
+  paths_probed: 9
+  documents_found: 0
+  hosts_unresolvable: 5
+  pointer_emitted: false

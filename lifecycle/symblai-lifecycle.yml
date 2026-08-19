@@ -1,0 +1,174 @@
+generated: '2026-08-14'
+method: probed
+source: >-
+  Live DNS/HTTP probes of every Symbl.ai host on 2026-08-14, plus Symbl.ai's own acquisition
+  announcement and its open-sourced documentation repository.
+summary: >-
+  Symbl.ai's standalone developer platform is DECOMMISSIONED. Symbl.ai was acquired by Invoca
+  (announced 2025-05-28) and every host that carried the developer program — the API itself,
+  the documentation site, the platform console, the Nebula playground and the integrations
+  directory — has since been removed from DNS. The marketing site, the pricing page, the
+  compliance page, the blog, the public Postman workspaces and the client SDKs on npm / PyPI /
+  pkg.go.dev are all still live, so the company still markets the product while no documented
+  endpoint is reachable and no account can be created.
+status: decommissioned
+
+acquisition:
+  acquirer: Invoca
+  announced: '2025-05-28'
+  announcement: https://symbl.ai/developers/blog/symbl-ai-is-joining-invoca/
+  acquirer_post: https://www.invoca.com/blog/the-future-of-ai-powered-buying-journeys-invocas-acquisition-of-symbl-ai
+  note: >-
+    Neither announcement states a sunset date for the developer platform, and no deprecation
+    notice, migration guide or Sunset/Deprecation header policy was found on any live Symbl.ai
+    page. The platform's removal is observable only by probing the hosts.
+
+# What the developer platform WAS, recorded from Symbl.ai's own open-sourced documentation.
+# None of these surfaces is reachable today.
+historical_surface:
+  api_base: https://api.symbl.ai
+  products:
+  - name: Async API
+    description: Upload audio, video, text or a URL for asynchronous conversation processing.
+  - name: Streaming API
+    description: WebSocket real-time speech-to-text and insights.
+  - name: Telephony API
+    description: PSTN / SIP dial-in for live conversation intelligence.
+  - name: Conversation API
+    description: Read topics, action items, questions, follow-ups, entities, sentiment, transcript.
+  - name: Management API
+    description: CRUD for Trackers and Conversation Groups.
+  - name: Subscribe API (Beta)
+    description: Listen-only WebSocket subscription to an existing conversation.
+  - name: Experience API / Pre-built UI
+    description: Hosted summary and trackers-and-analytics UI.
+  - name: Nebula LLM
+    description: Symbl.ai's conversation-tuned LLM and embeddings.
+  authentication:
+    style: token-exchange
+    token_endpoint: https://api.symbl.ai/oauth2/token:generate
+    credentials: appId + appSecret exchanged for a bearer accessToken
+    token_lifetime_seconds: 86400
+    docs: https://github.com/symblai/symbl-docs/blob/master/docs/developer-tools/authentication.md
+    note: >-
+      Documented as "OAuth 2.0" by Symbl but implemented as a bespoke JSON credential exchange
+      at a non-standard path, not an RFC 6749 grant. Recorded here rather than as a standalone
+      authentication artifact because the endpoint host no longer resolves.
+  event_surface:
+    websocket:
+    - wss://api.symbl.ai/v1/realtime/insights/{connectionId}
+    - wss://api.symbl.ai/v1/subscribe/{connectionId}
+    webhooks:
+      style: per-request callback
+      parameter: webhookUrl
+      description: >-
+        Async API jobs accept an optional webhookUrl; Symbl POSTs jobId + status on every job
+        status change. No subscription registry, no signature scheme and no event catalog were
+        published, so no AsyncAPI or Webhooks artifact is emitted.
+      docs: https://github.com/symblai/symbl-docs/blob/master/docs/async-api/overview/audio/post-audio-url.md
+
+# Every developer-facing host, probed 2026-08-14.
+host_probes:
+- host: symbl.ai
+  url: https://symbl.ai/
+  status: 200
+  state: live
+  role: marketing site (WordPress)
+- host: www.symbl.ai
+  url: https://www.symbl.ai/
+  status: 200
+  state: live
+- host: api.symbl.ai
+  url: https://api.symbl.ai/
+  status: 0
+  dns: NXDOMAIN
+  state: gone
+  role: API base for every documented endpoint
+- host: docs.symbl.ai
+  url: https://docs.symbl.ai/
+  status: 0
+  dns: NXDOMAIN
+  state: gone
+  role: developer documentation and API reference
+- host: platform.symbl.ai
+  url: https://platform.symbl.ai/#/signup
+  status: 0
+  dns: NXDOMAIN
+  state: gone
+  role: account console and credential issuance (still linked from the live pricing page)
+- host: nebula.symbl.ai
+  url: https://nebula.symbl.ai/
+  status: 0
+  dns: NXDOMAIN
+  state: gone
+  role: Nebula LLM playground (still linked from the live site footer)
+- host: integrations.symbl.ai
+  url: https://integrations.symbl.ai/
+  status: 0
+  dns: NXDOMAIN
+  state: gone
+  role: integrations directory (still linked from /developers/)
+- host: status.symbl.ai
+  url: https://status.symbl.ai/
+  status: 0
+  dns: NXDOMAIN
+  state: never-published-or-gone
+  role: probed for a status page; does not resolve
+
+status_page:
+  published: false
+  probed:
+  - url: https://status.symbl.ai/
+    result: NXDOMAIN
+  note: No status page was found on any live Symbl.ai surface. No StatusPage pointer is emitted.
+
+deprecation_policy:
+  published: false
+  sunset_header: unknown
+  deprecation_header: unknown
+  note: >-
+    No versioning or deprecation policy, and no RFC 8594 Sunset/Deprecation header
+    documentation, exists on any live or archived Symbl.ai page. No Deprecation pointer is
+    emitted. The platform was withdrawn without a published notice.
+
+sla:
+  published: false
+  note: >-
+    "Enterprise support & SLAs" is named as an Enterprise-tier benefit on the live pricing
+    page, but no SLA document is published.
+
+# What is still genuinely live and public.
+surviving_artifacts:
+- kind: documentation
+  url: https://github.com/symblai/symbl-docs
+  state: live
+  frozen: '2022-07-19'
+  note: >-
+    Symbl.ai deliberately open-sourced its Docusaurus documentation. The repository is public
+    and readable and is now the only surviving API reference; last push 2022-07-19, and its
+    every internal link points at the dead docs.symbl.ai host.
+- kind: code-samples
+  url: https://github.com/symblai/getting-started-samples
+  state: live
+  last_commit: '2023-04-03'
+- kind: sdks
+  url: packages/symblai-packages.yml
+  state: live
+  note: Last SDK releases are September–November 2024, all predating the platform's removal.
+- kind: postman
+  url: https://www.postman.com/symbldotai/workspace/symbl-ai/overview
+  state: live
+  note: First-party public workspaces under the verified publisher handle symbldotai.
+- kind: pricing
+  url: https://symbl.ai/company/pricing/
+  state: live
+  note: Still sells Free / PayG / Enterprise tiers and links Sign-up to the dead console.
+- kind: compliance
+  url: https://symbl.ai/platform/security/overview/
+  state: live
+
+x-evidence:
+  checked: '2026-08-14'
+  method: >-
+    curl -sSL -o /dev/null -w '%{http_code}' per host and dig +short per subdomain; a status of
+    0 with dns NXDOMAIN means the name did not resolve at all.

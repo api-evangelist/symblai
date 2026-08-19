@@ -1,43 +1,101 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: searched
-source: npm, PyPI, pkg.go.dev, github.com/symblai
+source: >-
+  registry.npmjs.org, pypi.org, proxy.golang.org and the github.com/symblai organization,
+  queried unauthenticated on 2026-08-14.
 notes: >-
-  Symbl.ai's standalone developer platform (api./docs./platform.symbl.ai) has
-  been decommissioned following the Invoca acquisition, but the official client
-  SDKs remain published on the public registries and the github.com/symblai org.
+  Symbl.ai's standalone developer platform (api./docs./platform.symbl.ai) has been
+  decommissioned following the Invoca acquisition — see lifecycle/symblai-lifecycle.yml — but
+  the official client SDKs remain published and installable from the public registries and the
+  github.com/symblai organization. DECAY SIGNAL: every first-party package's latest release
+  falls between 2024-09-03 and 2024-11-18, and each one targets api.symbl.ai, a host that no
+  longer resolves. The packages install; they cannot connect. Registry-reported versions and
+  publish dates below are read from each registry's metadata endpoint, not from prose.
+package_count: 5
+official_count: 5
 packages:
-  - language: javascript
-    registry: npm
-    name: "@symblai/symbl-js"
-    url: https://www.npmjs.com/package/@symblai/symbl-js
-    repo: https://github.com/symblai/symbl-js-sdk
-    install: npm install @symblai/symbl-js
-    version: 1.4.10
-    official: true
-    description: JavaScript SDK for Symbl.ai's Language Insights API platform.
-  - language: javascript
-    registry: npm
-    name: "@symblai/symbl-web-sdk"
-    url: https://www.npmjs.com/package/@symblai/symbl-web-sdk
-    repo: https://github.com/symblai/symbl-web-sdk
-    install: npm install @symblai/symbl-web-sdk
-    version: 1.0.14
-    official: true
-    description: Web SDK for accessing Symbl.ai conversation intelligence directly from the browser (streaming audio).
-  - language: python
-    registry: pypi
-    name: symbl
-    url: https://pypi.org/project/symbl/
-    repo: https://github.com/symblai/symbl-python-sdk
-    install: pip install symbl
-    version: 2.0.6
-    official: true
-    description: Python SDK delivering real-time and async conversation intelligence.
-  - language: go
-    registry: pkg.go.dev
-    name: github.com/symblai/symbl-go-sdk
-    url: https://pkg.go.dev/github.com/symblai/symbl-go-sdk
-    repo: https://github.com/symblai/symbl-go-sdk
-    install: go get github.com/symblai/symbl-go-sdk
-    official: true
-    description: Go SDK for the Symbl.ai platform.
+- language: javascript
+  registry: npm
+  name: "@symblai/symbl-js"
+  url: https://www.npmjs.com/package/@symblai/symbl-js
+  repo: https://github.com/symblai/symbl-js-sdk
+  install: npm install @symblai/symbl-js
+  version: 1.4.10
+  published: '2024-09-03'
+  first_published: '2021-08-14'
+  official: true
+  description: JavaScript SDK for Symbl.ai's Language Insights API platform.
+- language: javascript
+  registry: npm
+  name: "@symblai/symbl-web-sdk"
+  url: https://www.npmjs.com/package/@symblai/symbl-web-sdk
+  repo: https://github.com/symblai/symbl-web-sdk
+  install: npm install @symblai/symbl-web-sdk
+  version: 1.0.14
+  published: '2024-09-03'
+  first_published: '2021-11-10'
+  official: true
+  description: >-
+    Web SDK for accessing Symbl.ai conversation intelligence directly from the browser
+    (streaming audio over WebSocket).
+- language: javascript
+  registry: npm
+  name: "@symblai/symbl-ui-components"
+  url: https://www.npmjs.com/package/@symblai/symbl-ui-components
+  repo: https://github.com/symblai/symbl-ui-components
+  install: npm install @symblai/symbl-ui-components
+  version: 0.6.0
+  published: '2024-10-10'
+  first_published: '2024-10-03'
+  official: true
+  kind: ui-components
+  description: >-
+    Embeddable UI component library for rendering conversation-intelligence surfaces. Its npm
+    description points readers at https://docs.symbl.ai/docs/, which no longer resolves. See
+    components/symblai-components.yml.
+- language: python
+  registry: pypi
+  name: symbl
+  url: https://pypi.org/project/symbl/
+  repo: https://github.com/symblai/symbl-python-sdk
+  install: pip install symbl
+  version: 2.0.6
+  published: '2024-09-04'
+  official: true
+  description: Python SDK delivering real-time and async conversation intelligence.
+- language: go
+  registry: pkg.go.dev
+  name: github.com/symblai/symbl-go-sdk
+  url: https://pkg.go.dev/github.com/symblai/symbl-go-sdk
+  repo: https://github.com/symblai/symbl-go-sdk
+  install: go get github.com/symblai/symbl-go-sdk
+  version: v0.3.7
+  published: '2024-11-18'
+  official: true
+  description: Go SDK for the Symbl.ai platform. Read from proxy.golang.org/@latest.
+currency:
+  newest_release: '2024-11-18'
+  oldest_latest_release: '2024-09-03'
+  all_packages_stale_since: '2024-11-18'
+  note: >-
+    No first-party package has shipped a release since 2024-11-18, roughly six months before the
+    Invoca acquisition was announced and well before the API host was withdrawn. No package
+    carries a deprecation flag on its registry or a README notice about the platform's removal.
+x-evidence:
+  checked: '2026-08-14'
+  probes:
+  - url: https://registry.npmjs.org/@symblai%2Fsymbl-js
+    http_status: 200
+  - url: https://registry.npmjs.org/@symblai%2Fsymbl-web-sdk
+    http_status: 200
+  - url: https://registry.npmjs.org/@symblai%2Fsymbl-ui-components
+    http_status: 200
+  - url: https://pypi.org/pypi/symbl/json
+    http_status: 200
+  - url: https://proxy.golang.org/github.com/symblai/symbl-go-sdk/@latest
+    http_status: 200
+  - url: https://registry.npmjs.org/-/v1/search?text=scope:symblai
+    http_status: 200
+    result: >-
+      Scope search returns 0 results (the registry does not index the scope), so packages were
+      confirmed individually by name.

@@ -1,0 +1,106 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  https://symbl.ai/platform/security/overview/ (live) and Symbl.ai's open-sourced documentation
+  at https://github.com/symblai/symbl-docs. No OpenAPI, AsyncAPI or JSON Schema exists for this
+  provider to derive from — see lifecycle/symblai-lifecycle.yml.
+notes: >-
+  Cross-cutting standards assertion. Every `conforms: false` below is a measured absence, not a
+  guess: it means the standard was looked for in Symbl.ai's own published material and was not
+  found. Two entries are marked conforms: true only because Symbl.ai itself publishes the
+  claim — the SOC 2 / PCI / HIPAA / GDPR / CSA program on its live security page.
+standards:
+- id: soc2
+  conforms: true
+  evidence: >-
+    "Symbl has completed a full third-party SOC 2 Type II audit" — published on
+    https://symbl.ai/platform/security/overview/ (HTTP 200, 2026-08-14). Report not
+    self-service; not independently verified by API Evangelist.
+- id: hipaa
+  conforms: true
+  evidence: >-
+    Offers HIPAA Business Associate Agreements to healthcare customers, per
+    https://symbl.ai/platform/security/overview/
+- id: pci-dss
+  conforms: true
+  evidence: >-
+    "Symbl.ai is compliant with the Payment Card Industry (PCI) Data Security Standard (DSS)",
+    per https://symbl.ai/platform/security/overview/
+- id: gdpr
+  conforms: true
+  evidence: >-
+    Published GDPR program covering vendor/asset review and EU/UK personal-data transfers, per
+    https://symbl.ai/platform/security/overview/ and https://symbl.ai/privacy-policy/
+- id: csa-caiq
+  conforms: true
+  evidence: >-
+    "Symbl.ai completed the security assessment with the Consensus Assessments Initiative
+    Questionnaire (CAIQ)", per https://symbl.ai/platform/security/overview/. Not verified
+    against the CSA STAR registry.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    Symbl's documentation calls its scheme "OAuth 2.0" and cites RFC 6749, but the documented
+    flow is a bespoke JSON credential exchange — POST {type, appId, appSecret} to
+    /oauth2/token:generate returning {accessToken, expiresIn} — which is not an RFC 6749 grant
+    type, uses no standard token-endpoint parameters, and declares no scopes. Source:
+    https://github.com/symblai/symbl-docs/blob/master/docs/developer-tools/authentication.md
+- id: oidc
+  conforms: false
+  evidence: >-
+    https://symbl.ai/.well-known/openid-configuration returns 404; no OpenID Connect discovery
+    document is served on any Symbl.ai host.
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    Errors are plain JSON objects with a `message` field. No application/problem+json media
+    type and no type/title/status/detail members appear anywhere in the documentation. Source:
+    https://github.com/symblai/symbl-docs/blob/master/docs/developer-tools/errors.md
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No Idempotency-Key header, no idempotent-retry semantics and no request-deduplication
+    guidance is documented for any Symbl API.
+- id: pagination
+  conforms: false
+  evidence: >-
+    No cursor, offset/limit or link-header pagination convention is documented for the
+    Conversation or Management APIs.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document is published anywhere. Probed symbl.ai/openapi.json (404);
+    api.symbl.ai and docs.symbl.ai do not resolve; the symblai GitHub organization's 43 public
+    repositories contain no spec file. Symbl.ai's only machine-readable API description is its
+    public Postman workspace.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    A real event surface existed (WebSocket Streaming and Subscribe APIs, plus webhookUrl job
+    callbacks) but no AsyncAPI document and no event catalog was ever published.
+- id: rfc8594
+  conforms: false
+  evidence: >-
+    No Sunset or Deprecation header policy is documented, and the platform was withdrawn
+    without a published deprecation notice.
+- id: mcp
+  conforms: false
+  evidence: >-
+    No Model Context Protocol server, hosted or stdio, is published by Symbl.ai or the symblai
+    GitHub organization.
+- id: a2a
+  conforms: false
+  evidence: >-
+    https://symbl.ai/.well-known/agent-card.json and /.well-known/agent.json both return 404.
+x-evidence:
+  checked: '2026-08-14'
+  probes:
+  - url: https://symbl.ai/platform/security/overview/
+    http_status: 200
+  - url: https://symbl.ai/.well-known/openid-configuration
+    http_status: 404
+  - url: https://symbl.ai/openapi.json
+    http_status: 404
+  - url: https://api.symbl.ai/openapi.json
+    http_status: 0
+    result: NXDOMAIN

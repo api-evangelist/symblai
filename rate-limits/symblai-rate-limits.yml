@@ -1,0 +1,118 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  https://symbl.ai/company/pricing/ (live, HTTP 200) and Symbl.ai's open-sourced documentation
+  at https://github.com/symblai/symbl-docs (FAQ, Create Tracker reference, Error Codes).
+docs:
+- https://symbl.ai/company/pricing/
+- https://github.com/symblai/symbl-docs/blob/master/docs/faq.md
+- https://github.com/symblai/symbl-docs/blob/master/docs/management-api/trackers/create-tracker.md
+- https://github.com/symblai/symbl-docs/blob/master/docs/developer-tools/errors.md
+notes: >-
+  Symbl.ai governed load by CONCURRENCY, not by requests-per-window: a plan buys a number of
+  simultaneous Streaming connections and simultaneous Async jobs, and exceeding it returns 429.
+  The per-tier concurrency ceilings are still published on the live pricing page today; the
+  per-API concurrency, payload and object ceilings come from the open-sourced docs. NO RUNTIME
+  RATE-LIMIT HEADERS were ever documented — no X-RateLimit-*, no RateLimit-*, no Retry-After —
+  so a client could not read remaining budget or a back-off hint from a response and had to
+  count its own in-flight work. That gap is the finding. All endpoints described here sit on
+  api.symbl.ai, which no longer resolves (see lifecycle/symblai-lifecycle.yml).
+limit_count: 8
+headers:
+  documented: false
+  ratelimit_headers: []
+  retry_after: false
+  note: >-
+    Searched the full open-sourced documentation set for X-RateLimit, RateLimit and Retry-After;
+    no rate-limit response header of any kind is documented. Exhaustion is signalled only by the
+    HTTP status code and a message body.
+exhaustion:
+  status_code: 429
+  meaning: Too Many Requests — concurrency ceiling for the API or the account was exceeded.
+  body: JSON object with a `message` field.
+  remediation: >-
+    Wait for in-flight jobs or connections to complete; Symbl directs accounts needing more
+    concurrency to support@symbl.ai.
+limits:
+- id: streaming-concurrency-free
+  scope: per-account
+  api: Streaming API
+  window: concurrent
+  limit: 5
+  unit: concurrent connections
+  plan: Free
+  source: https://symbl.ai/company/pricing/
+- id: streaming-concurrency-payg
+  scope: per-account
+  api: Streaming API
+  window: concurrent
+  limit: 50
+  unit: concurrent connections
+  plan: PayG
+  source: https://symbl.ai/company/pricing/
+- id: streaming-concurrency-trial-docs
+  scope: per-account
+  api: Streaming API
+  window: concurrent
+  limit: 2
+  unit: concurrent connections
+  plan: trial (as documented)
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/faq.md
+  note: >-
+    The archived FAQ states 2 concurrent connections on trial and 50 after upgrade; the live
+    pricing page states 5 on Free and 50 on PayG. Both published figures are recorded — they
+    disagree, and the docs figure is the older of the two.
+- id: async-job-concurrency
+  scope: per-account
+  api: Async API
+  window: concurrent
+  limit: 50
+  unit: concurrent jobs
+  plan: paid
+  trial_limit: 2
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/faq.md
+- id: tracker-management-concurrency
+  scope: per-endpoint
+  api: Management API — Create/Update Tracker
+  window: concurrent
+  limit: 1
+  unit: concurrent request
+  status_on_exhaustion: 429
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/management-api/trackers/create-tracker.md
+- id: tracker-request-body-size
+  scope: per-request
+  api: Management API — Create/Update Tracker
+  limit: 1
+  unit: MB request body
+  status_on_exhaustion: 413
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/management-api/trackers/create-tracker.md
+- id: trackers-per-account
+  scope: per-account
+  api: Management API — Trackers
+  limit: 500
+  unit: trackers
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/faq.md
+  note: Raised to 500 per account on 2022-02-08 per the changelog.
+- id: async-media-duration
+  scope: per-request
+  api: Async API
+  limit: 4
+  unit: hours of media per file
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/faq.md
+related_ceilings:
+- api: Management API — Trackers
+  ceiling: 50 vocabulary terms per Tracker (5 recommended minimum)
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/faq.md
+- api: Subscribe API (Beta)
+  ceiling: 10,000 listen-only participants per call
+  source: https://github.com/symblai/symbl-docs/blob/master/docs/subscribe-api.md
+x-evidence:
+  checked: '2026-08-14'
+  probes:
+  - url: https://symbl.ai/company/pricing/
+    http_status: 200
+  - url: https://raw.githubusercontent.com/symblai/symbl-docs/master/docs/faq.md
+    http_status: 200
+  - url: https://api.symbl.ai/
+    http_status: 0
+    result: NXDOMAIN — no live response could be observed to confirm headers empirically.
