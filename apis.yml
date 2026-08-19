@@ -60,7 +60,7 @@ x-coverage:
   - url: https://symbl.ai/company/pricing/
     status: 200
   checked: '2026-08-14'
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-14'
 tags:
