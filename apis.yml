@@ -80,7 +80,7 @@ tags:
 - Speech-to-Text
 - Voice AI
 - Artificial Intelligence
-- Machine-Learning
+- Machine Learning
 - Real-Time
 - SDK
 tags_raw:
@@ -92,6 +92,7 @@ tags_raw:
 - Machine Learning
 - Real Time
 - SDKs
+- Machine-Learning
 apis: []
 maintainers:
 - FN: Kin Lane
